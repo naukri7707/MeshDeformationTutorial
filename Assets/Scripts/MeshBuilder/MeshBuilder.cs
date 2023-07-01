@@ -6,34 +6,42 @@ using UnityEngine.Events;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public abstract class MeshBuilder : MonoBehaviour
 {
-    protected MeshFilter MeshFilter { get; private set; }
+    private MeshFilter meshFilter;
 
-    protected MeshRenderer MeshRender { get; private set; }
-
-    [SerializeField]
-    private bool createOnStart = true;
-
-    protected abstract string MeshName { get; }
-
-    protected virtual void Awake()
+    public MeshFilter MeshFilter
     {
-        MeshFilter = GetComponent<MeshFilter>();
-        MeshRender = GetComponent<MeshRenderer>();
-    }
-
-    protected virtual void Start()
-    {
-        if (createOnStart)
+        get
         {
-            BuildMesh();
+            if (meshFilter == null)
+            {
+                meshFilter = GetComponent<MeshFilter>();
+            }
+            return meshFilter;
         }
     }
+
+    private MeshRenderer meshRenderer;
+
+    public MeshRenderer MeshRenderer
+    {
+        get
+        {
+            if (meshRenderer == null)
+            {
+                meshRenderer = GetComponent<MeshRenderer>();
+            }
+            return meshRenderer;
+        }
+    }
+
+    [SerializeField]
+    protected string meshName;
 
     public void BuildMesh()
     {
         var mesh = new Mesh()
         {
-            name = MeshName
+            name = meshName
         };
 
         OnMeshBuilding(mesh);

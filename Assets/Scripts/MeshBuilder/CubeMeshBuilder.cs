@@ -6,22 +6,28 @@ using UnityEngine.UIElements;
 [RequireComponent(typeof(BoxCollider))]
 public class CubeMeshBuilder : MeshBuilder
 {
-    protected override string MeshName => "Cube";
+    private BoxCollider boxCollider;
 
-    protected BoxCollider BoxCollider { get; private set; }
+    public BoxCollider BoxCollider
+    {
+        get
+        {
+            if (boxCollider == null)
+            {
+                boxCollider = GetComponent<BoxCollider>();
+            }
+            return boxCollider;
+        }
+    }
 
     [SerializeField]
     private Vector3Int vertexOfFace = new(3, 3, 3);
-
-    [SerializeField]
-    private int materialIndex;
     
-    protected override void Awake()
+    protected virtual void Reset()
     {
-        base.Awake();
-        BoxCollider = GetComponent<BoxCollider>();
+        meshName = "Cube";
     }
-
+    
     protected override void OnMeshBuilding(Mesh mesh)
     {
         SetVertices(mesh);
@@ -37,7 +43,7 @@ public class CubeMeshBuilder : MeshBuilder
         var uvs = new Vector2[vertexCount];
         var tangents = new Vector4[vertexCount];
         var size = BoxCollider.size;
-        var offset = BoxCollider.center - size / 2F;
+        var offset = BoxCollider.bounds.center - size / 2F;
         var v = 0;
 
         // set body
@@ -59,7 +65,7 @@ public class CubeMeshBuilder : MeshBuilder
             // right
             for (var z = 1; z <= zFace; z++)
             {
-                var zRatio = (float)z / xFace;
+                var zRatio = (float)z / zFace;
                 var zPos = size.z * zRatio;
                 vertices[v] = new Vector3(size.x, yPos, zPos) + offset;
                 normals[v] = Vector3.right;
@@ -81,7 +87,7 @@ public class CubeMeshBuilder : MeshBuilder
             // left
             for (var z = zFace - 1; z > 0; z--)
             {
-                var zRatio = (float)z / xFace;
+                var zRatio = (float)z / zFace;
                 var zPos = size.z * zRatio;
                 vertices[v] = new Vector3(0, yPos, zPos) + offset;
                 normals[v] = Vector3.left;
@@ -148,8 +154,8 @@ public class CubeMeshBuilder : MeshBuilder
 
         t = SetTopFace(triangles, t, ring);
         t = SetBottomFace(triangles, t, ring);
-        mesh.subMeshCount = MeshRender.materials.Length;
-        mesh.SetTriangles(triangles, materialIndex);
+        mesh.subMeshCount = MeshRenderer.sharedMaterials.Length;
+        mesh.SetTriangles(triangles, 0);
         mesh.RecalculateNormals();
     }
 
