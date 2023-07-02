@@ -13,6 +13,8 @@ namespace Naukri.MeshDeformation
 
         public VertexModifier[] vertexModifiers;
 
+        public bool changeShaderPassDynamicly;
+
         public Material[] materials;
 
         public ShaderPassLayer[] shaderPassLayers;
@@ -43,9 +45,13 @@ namespace Naukri.MeshDeformation
             {
                 vertexModifier.InitialImpl(this);
             }
-            MeshRenderer.materials = materials;
-            MeshFilter.mesh.subMeshCount = materials.Length;
             originalVertices = MeshFilter.mesh.vertices;
+
+            if(changeShaderPassDynamicly)
+            {
+                MeshRenderer.materials = materials;
+                MeshFilter.mesh.subMeshCount = materials.Length;
+            }
         }
 
         public Vector3 ModifyVertex(VertexModifier.Args args)
@@ -68,7 +74,7 @@ namespace Naukri.MeshDeformation
         public void UpdateShaderPass()
         {
             // 如果偵測到有 vertex 變更，更新 face 材質
-            if (changedVertex.Count > 0)
+            if (changeShaderPassDynamicly && changedVertex.Count > 0)
             {
                 var vertices = MeshFilter.mesh.vertices;
                 var originalVertices = OriginalVertices;
