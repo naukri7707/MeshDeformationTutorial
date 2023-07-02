@@ -3,61 +3,64 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-public abstract class MeshBuilder : MonoBehaviour
+namespace Naukri.MeshHelper
 {
-    private MeshFilter meshFilter;
-
-    public MeshFilter MeshFilter
+    [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
+    public abstract class MeshBuilder : MonoBehaviour
     {
-        get
+        private MeshFilter meshFilter;
+
+        public MeshFilter MeshFilter
         {
-            if (meshFilter == null)
+            get
             {
-                meshFilter = GetComponent<MeshFilter>();
+                if (meshFilter == null)
+                {
+                    meshFilter = GetComponent<MeshFilter>();
+                }
+                return meshFilter;
             }
-            return meshFilter;
         }
-    }
 
-    private MeshRenderer meshRenderer;
+        private MeshRenderer meshRenderer;
 
-    public MeshRenderer MeshRenderer
-    {
-        get
+        public MeshRenderer MeshRenderer
         {
-            if (meshRenderer == null)
+            get
             {
-                meshRenderer = GetComponent<MeshRenderer>();
+                if (meshRenderer == null)
+                {
+                    meshRenderer = GetComponent<MeshRenderer>();
+                }
+                return meshRenderer;
             }
-            return meshRenderer;
         }
-    }
 
-    [SerializeField]
-    protected string meshName;
+        [SerializeField]
+        protected string meshName;
 
-    public void BuildMesh()
-    {
-        var mesh = new Mesh()
+        public void BuildMesh()
         {
-            name = meshName
-        };
+            var mesh = new Mesh()
+            {
+                name = meshName
+            };
 
-        OnMeshBuilding(mesh);
-        MeshFilter.mesh = mesh;
+            OnMeshBuilding(mesh);
+            MeshFilter.mesh = mesh;
+        }
+
+        public void DestoryMesh()
+        {
+            MeshFilter.sharedMesh = null;
+        }
+
+        public void RebuildMesh()
+        {
+            DestoryMesh();
+            BuildMesh();
+        }
+
+        protected abstract void OnMeshBuilding(Mesh mesh);
     }
-
-    public void DestoryMesh()
-    {
-        MeshFilter.sharedMesh = null;
-    }
-
-    public void RebuildMesh()
-    {
-        DestoryMesh();
-        BuildMesh();
-    }
-
-    protected abstract void OnMeshBuilding(Mesh mesh);
 }

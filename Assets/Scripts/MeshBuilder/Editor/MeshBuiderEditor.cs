@@ -1,35 +1,39 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(MeshBuilder), true)]
-public class MeshBuiderEditor : Editor
+namespace Naukri.MeshHelper.Editor
 {
-    private MeshBuilder meshBuilder;
 
-    private void OnEnable()
+    [CustomEditor(typeof(MeshBuilder), true)]
+    public class MeshBuiderEditor : UnityEditor.Editor
     {
-        meshBuilder = serializedObject.targetObject as MeshBuilder;
-    }
+        private MeshBuilder meshBuilder;
 
-    public override void OnInspectorGUI()
-    {
-        DrawDefaultInspector();
-        if (GUILayout.Button("Build"))
+        private void OnEnable()
         {
-            meshBuilder.RebuildMesh();
+            meshBuilder = serializedObject.targetObject as MeshBuilder;
         }
-        if (GUILayout.Button("Create Asset"))
-        {
-            CreateAsset();
-        }
-    }
 
-    public void CreateAsset()
-    {
-        var newMesh = Instantiate(meshBuilder.MeshFilter.sharedMesh);
-        string assetPath = $"Assets/{newMesh.name}.asset";
-        AssetDatabase.CreateAsset(newMesh, assetPath);
-        AssetDatabase.SaveAssets();
-        AssetDatabase.Refresh();
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            if (GUILayout.Button("Build"))
+            {
+                meshBuilder.RebuildMesh();
+            }
+            if (GUILayout.Button("Create Asset"))
+            {
+                CreateAsset();
+            }
+        }
+
+        public void CreateAsset()
+        {
+            var newMesh = Instantiate(meshBuilder.MeshFilter.sharedMesh);
+            string assetPath = $"Assets/{newMesh.name}.asset";
+            AssetDatabase.CreateAsset(newMesh, assetPath);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
     }
 }
