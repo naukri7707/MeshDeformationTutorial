@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     public readonly struct Triangle : IEquatable<Triangle>
     {

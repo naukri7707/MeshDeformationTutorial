@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     public readonly struct FaceInfo
     {

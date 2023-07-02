@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     public abstract class MeshDeformer : MonoBehaviour
     {
