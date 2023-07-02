@@ -13,7 +13,7 @@ namespace Naukri.MeshHelper
             boxCollider = target.GetComponent<BoxCollider>();
         }
 
-        protected override void OnVertexModify(VertexModifyArgs args)
+        protected override void OnVertexModify(Args args)
         {
             var newPoint = transform.TransformPoint(args.vector);
             var closestPoint = boxCollider.ClosestPoint(newPoint);
@@ -22,5 +22,6 @@ namespace Naukri.MeshHelper
                 args.vector = transform.InverseTransformPoint(closestPoint);
             }
         }
+
     }
 }

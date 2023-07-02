@@ -6,6 +6,31 @@ namespace Naukri.MeshHelper
 {
     public abstract class VertexModifier : ScriptableObject
     {
+        public class Args
+        {
+            public readonly MeshDeformer meshDeformer;
+
+            public readonly int vertexIndex;
+
+            public Vector3 vector;
+
+            private bool isCompleted;
+
+            public Args(MeshDeformer meshDeformer, int vertexIndex, Vector3 vector)
+            {
+                this.meshDeformer = meshDeformer;
+                this.vertexIndex = vertexIndex;
+                this.vector = vector;
+            }
+
+            public bool IsCompleted => isCompleted;
+
+            public void Completed()
+            {
+                isCompleted = true;
+            }
+        }
+
         protected DeformableObject _target;
 
         protected DeformableObject target => _target;
@@ -20,13 +45,13 @@ namespace Naukri.MeshHelper
             Initial();
         }
 
-        protected abstract void Initial();
+        protected virtual void Initial() { }
 
-        internal void OnVertexModifyImpl(VertexModifyArgs args)
+        internal void ModifyVertex(Args args)
         {
             OnVertexModify(args);
         }
 
-        protected abstract void OnVertexModify(VertexModifyArgs args);
+        protected abstract void OnVertexModify(Args args);
     }
 }
