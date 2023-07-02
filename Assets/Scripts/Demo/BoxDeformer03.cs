@@ -1,4 +1,4 @@
-using Naukri.MeshHelper;
+using Naukri.MeshDeformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,9 +7,11 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class BoxDeformer03 : MeshDeformer
 {
-    private BoxCollider boxCollider;
-
     public DeformStyle style = DeformStyle.YAxis;
+
+    public float spacing = 0.0001F;
+
+    private BoxCollider boxCollider;
 
     protected override void Awake()
     {
@@ -36,7 +38,6 @@ public class BoxDeformer03 : MeshDeformer
             {
                 var closestDistance = float.MaxValue;
                 var closestPoint = Vector3.zero;
-                // 計算投影平面的法線
 
                 foreach (var face in faceInfos)
                 {
@@ -51,30 +52,28 @@ public class BoxDeformer03 : MeshDeformer
                     // 投影目標點至平面並取得向量 (相對於平面原點的位置)
                     var projectedVector = Vector3.ProjectOnPlane(direction, planeNormal);
 
-                    // 更新投影點的位置
+                    // 取得投影點的世界座標
                     var projectedPoint = originPoint + projectedVector;
 
-                    var distance = Vector3.Distance(targetPoint, projectedPoint);
+                    //  取得加入間距的座標
+                    var targetToProjectedDirection = (projectedPoint - targetPoint).normalized;
+                    var spacedPoint = projectedPoint + (targetToProjectedDirection * spacing);
+
+                    var distance = Vector3.Distance(targetPoint, spacedPoint);
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestPoint = projectedPoint;
+                        closestPoint = spacedPoint;
                     }
                 }
 
-                // 如果計算有效
+                // 如果計算合法
                 if (closestDistance != float.MaxValue)
                 {
                     // 將 closestPoint 坐標系轉換為 deformable 的相對座標並儲存
                     var closestVector = deformable.transform.InverseTransformPoint(closestPoint);
 
-                    // 建立 VertexModify 參數
-                    var args = new VertexModifyArgs(this, i, closestVector);
-
-                    // 使用 VertexModify 調整 vertex
-                    var modifiedVector = deformable.ModifyVertex(args);
-
-                    vertices[i] = modifiedVector;
+                    vertices[i] = closestVector;
                 }
             }
         }

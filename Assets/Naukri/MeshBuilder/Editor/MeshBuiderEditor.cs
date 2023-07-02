@@ -1,17 +1,17 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Naukri.MeshHelper.Editor
+namespace Naukri.MeshBuilder.Editor
 {
 
-    [CustomEditor(typeof(MeshBuilder), true)]
+    [CustomEditor(typeof(MeshBuilderBase), true)]
     public class MeshBuiderEditor : UnityEditor.Editor
     {
-        private MeshBuilder meshBuilder;
+        private MeshBuilderBase meshBuilder;
 
         private void OnEnable()
         {
-            meshBuilder = serializedObject.targetObject as MeshBuilder;
+            meshBuilder = serializedObject.targetObject as MeshBuilderBase;
         }
 
         public override void OnInspectorGUI()

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshBuilder
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class CubeBuilder : MeshBuilder
+    public class CubeBuilder : MeshBuilderBase
     {
         private BoxCollider boxCollider;
 
