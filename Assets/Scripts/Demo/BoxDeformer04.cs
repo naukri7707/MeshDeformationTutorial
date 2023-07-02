@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class BoxDeformer02 : MeshDeformer
+public class BoxDeformer04 : MeshDeformer
 {
     public DeformStyle style = DeformStyle.YAxis;
+
+    public float spacing = 0.0001F;
 
     private BoxCollider boxCollider;
 
@@ -53,11 +55,15 @@ public class BoxDeformer02 : MeshDeformer
                     // 取得投影點的世界座標
                     var projectedPoint = originPoint + projectedVector;
 
-                    var distance = Vector3.Distance(targetPoint, projectedPoint);
+                    //  取得加入間距的座標
+                    var targetToProjectedDirection = (projectedPoint - targetPoint).normalized;
+                    var spacedPoint = projectedPoint + (targetToProjectedDirection * spacing);
+
+                    var distance = Vector3.Distance(targetPoint, spacedPoint);
                     if (distance < closestDistance)
                     {
                         closestDistance = distance;
-                        closestPoint = projectedPoint;
+                        closestPoint = spacedPoint;
                     }
                 }
 
@@ -67,7 +73,13 @@ public class BoxDeformer02 : MeshDeformer
                     // 將 closestPoint 坐標系轉換為 deformable 的相對座標並儲存
                     var closestVector = deformable.transform.InverseTransformPoint(closestPoint);
 
-                    vertices[i] = closestVector;
+                    // 建立 VertexModify 參數
+                    var args = new VertexModifier.Args(this, i, closestVector);
+
+                    // 使用 VertexModify 調整 vertex
+                    var modifiedVector = deformable.ModifyVertex(args);
+
+                    vertices[i] = modifiedVector;
                 }
             }
         }
