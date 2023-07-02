@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Naukri.MeshHelper
 {
@@ -30,6 +31,23 @@ namespace Naukri.MeshHelper
             faces[5] = new FaceInfo(center + new Vector3(0, 0, -extents.z), -transform.forward);
 
             return faces;
+        }
+
+        public static FaceInfo[] GetFaceInfos(BoxCollider boxCollider, DeformStyle style)
+        {
+            var transform = boxCollider.transform;
+            var center = boxCollider.bounds.center;
+            var extents = boxCollider.bounds.extents;
+
+            var faces = new List<FaceInfo>();
+            if (style.HasFlag(DeformStyle.Right)) faces.Add(new FaceInfo(center + new Vector3(extents.x, 0, 0), transform.right));
+            if (style.HasFlag(DeformStyle.Left)) faces.Add(new FaceInfo(center + new Vector3(-extents.x, 0, 0), -transform.right));
+            if (style.HasFlag(DeformStyle.Up)) faces.Add(new FaceInfo(center + new Vector3(0, extents.y, 0), transform.up));
+            if (style.HasFlag(DeformStyle.Down)) faces.Add(new FaceInfo(center + new Vector3(0, -extents.y, 0), -transform.up));
+            if (style.HasFlag(DeformStyle.Forward)) faces.Add(new FaceInfo(center + new Vector3(0, 0, extents.z), transform.forward));
+            if (style.HasFlag(DeformStyle.Back)) faces.Add(new FaceInfo(center + new Vector3(0, 0, -extents.z), -transform.forward));
+
+            return faces.ToArray();
         }
     }
 }
