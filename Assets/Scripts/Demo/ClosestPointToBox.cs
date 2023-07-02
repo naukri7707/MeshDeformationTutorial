@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Naukri.MeshHelper;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class ClosestPointToBox : MonoBehaviour
         if (isInsideBounds && BoxCollider.ClosestPoint(targetPoint) == targetPoint)
         {
             // 取得 BoxCollider 六面的原點與法線
-            var faceInfos = GetFaceInfoInfo();
+            var faceInfos = FaceInfo.GetFaceInfos(boxCollider);
 
             var closestDistance = float.MaxValue;
 
@@ -84,23 +85,5 @@ public class ClosestPointToBox : MonoBehaviour
         // 繪製 BoxCollider 外輪廓
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(BoxCollider.bounds.center, BoxCollider.bounds.size);
-    }
-
-    // 取得 BoxCollider 六個面的原點與法線
-    public FaceInfo[] GetFaceInfoInfo()
-    {
-        var center = BoxCollider.bounds.center;
-        var extents = BoxCollider.bounds.extents;
-
-        var faceInfos = new FaceInfo[6];
-
-        faceInfos[0] = new FaceInfo(center + new Vector3(extents.x, 0, 0), transform.right);
-        faceInfos[1] = new FaceInfo(center + new Vector3(-extents.x, 0, 0), -transform.right);
-        faceInfos[2] = new FaceInfo(center + new Vector3(0, extents.y, 0), transform.up);
-        faceInfos[3] = new FaceInfo(center + new Vector3(0, -extents.y, 0), -transform.up);
-        faceInfos[4] = new FaceInfo(center + new Vector3(0, 0, extents.z), transform.forward);
-        faceInfos[5] = new FaceInfo(center + new Vector3(0, 0, -extents.z), -transform.forward);
-
-        return faceInfos;
     }
 }
