@@ -15,11 +15,11 @@ public class ProjectOnPlaneDemo : MonoBehaviour
     public Transform projected;
 
     private void OnDrawGizmos()
-    {  
+    {
         // 目標點之於平面原點的向量
         var direction = target.position - transform.position;
 
-        // 計算投影平面的法向量
+        // 計算投影平面的法線
         var planeNormal = transform.position - faceTo.position;
         planeNormal.Normalize();
 

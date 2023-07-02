@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.SearchService;
 using UnityEngine;
 
-public class ClosestPointOnBoundsDemo : MonoBehaviour
+public class ClosestPointDemo : MonoBehaviour
 {
     public Transform target;
 
@@ -26,8 +26,8 @@ public class ClosestPointOnBoundsDemo : MonoBehaviour
     private void OnDrawGizmos()
     {
         var targetPoint = target.position;
-
-        var closestPoint = BoxCollider.ClosestPointOnBounds(targetPoint);
+        // 取得 targetPoint 與碰撞器表面最近的點
+        var closestPoint = BoxCollider.ClosestPoint(targetPoint);
 
         closest.position = closestPoint;
 
