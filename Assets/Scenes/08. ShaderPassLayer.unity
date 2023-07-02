@@ -419,6 +419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vertexModifiers:
   - {fileID: 11400000, guid: 6a90e668b9fc7904a863d08889990ae2, type: 2}
+  changeShaderPassDynamicly: 1
   materials:
   - {fileID: 2100000, guid: 99fc2cc868da2334d897198a011ff6c9, type: 2}
   - {fileID: 2100000, guid: 10345e2363e454847abcc2e4aca34b13, type: 2}
