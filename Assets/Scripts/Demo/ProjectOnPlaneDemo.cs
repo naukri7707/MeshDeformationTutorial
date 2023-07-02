@@ -29,12 +29,14 @@ public class ProjectOnPlaneDemo : MonoBehaviour
         // 更新投影點的位置
         projected.position = transform.position + projectedVector;
 
+#if UNITY_EDITOR
         // 繪製平面
-        Handles.color = Color.green;
+        UnityEditor.Handles.color = Color.green;
         for (var i = 1; i <= 100; i++)
         {
-            Handles.DrawWireDisc(transform.position, planeNormal, i * 0.01F);
+            UnityEditor.Handles.DrawWireDisc(transform.position, planeNormal, i * 0.01F);
         }
+#endif
 
         // 繪製連線
         Gizmos.color = Color.green;
