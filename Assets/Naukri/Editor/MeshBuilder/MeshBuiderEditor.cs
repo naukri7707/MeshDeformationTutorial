@@ -1,9 +1,9 @@
-﻿using UnityEditor;
+﻿using Naukri.MeshBuilder;
+using UnityEditor;
 using UnityEngine;
 
-namespace Naukri.MeshBuilder.Editor
+namespace Naukri.Editor.MeshBuilder
 {
-
     [CustomEditor(typeof(MeshBuilderBase), true)]
     public class MeshBuiderEditor : UnityEditor.Editor
     {
