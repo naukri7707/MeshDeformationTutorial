@@ -21,6 +21,7 @@ public class ProjectOnPlaneDemo : MonoBehaviour
 
         // 計算投影平面的法向量
         var planeNormal = transform.position - faceTo.position;
+        planeNormal.Normalize();
 
         // 投影目標點至平面並取得向量 (相對於平面原點的位置)
         var projectedVector = Vector3.ProjectOnPlane(direction, planeNormal);
