@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(BoxCollider))]
-public class CubeMeshBuilder : MeshBuilder
+public class CubeBuilder : MeshBuilder
 {
     private BoxCollider boxCollider;
 
