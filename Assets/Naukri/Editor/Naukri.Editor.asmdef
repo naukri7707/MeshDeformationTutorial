@@ -1,0 +1,18 @@
+{
+    "name": "Naukri.Editor",
+    "rootNamespace": "Naukri",
+    "references": [
+        "GUID:6b7c79809fc30fb4ab120f38e732e8d5"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
