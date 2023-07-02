@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshBuilder
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
-    public abstract class MeshBuilder : MonoBehaviour
+    public abstract class MeshBuilderBase : MonoBehaviour
     {
         private MeshFilter meshFilter;
 

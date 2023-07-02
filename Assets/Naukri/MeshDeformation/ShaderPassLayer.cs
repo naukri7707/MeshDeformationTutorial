@@ -1,4 +1,4 @@
-﻿namespace Naukri.MeshHelper
+﻿namespace Naukri.MeshDeformation
 {
     [System.Serializable]
     public struct ShaderPassLayer

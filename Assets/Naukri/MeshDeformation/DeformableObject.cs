@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
     public sealed class DeformableObject : MonoBehaviour

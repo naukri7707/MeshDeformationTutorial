@@ -1,10 +1,9 @@
-using Naukri.MeshHelper;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     [RequireComponent(typeof(BoxCollider))]
     public class BoxDeformer : MeshDeformer

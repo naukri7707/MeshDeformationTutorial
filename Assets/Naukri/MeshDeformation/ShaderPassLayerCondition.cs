@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     public abstract class ShaderPassLayerCondition : ScriptableObject
     {

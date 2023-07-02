@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation.Condition
 {
     public class CliffCondition : ShaderPassLayerCondition
     {

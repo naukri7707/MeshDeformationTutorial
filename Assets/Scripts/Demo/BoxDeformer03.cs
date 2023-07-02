@@ -1,4 +1,4 @@
-using Naukri.MeshHelper;
+using Naukri.MeshDeformation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -67,7 +67,7 @@ public class BoxDeformer03 : MeshDeformer
                     }
                 }
 
-                // 如果計算有效
+                // 如果計算合法
                 if (closestDistance != float.MaxValue)
                 {
                     // 將 closestPoint 坐標系轉換為 deformable 的相對座標並儲存

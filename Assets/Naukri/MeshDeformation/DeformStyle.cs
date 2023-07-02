@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Naukri.MeshHelper
+namespace Naukri.MeshDeformation
 {
     [Flags]
     public enum DeformStyle
