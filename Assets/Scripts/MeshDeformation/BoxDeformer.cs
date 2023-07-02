@@ -69,16 +69,20 @@ namespace Naukri.MeshHelper
                         }
                     }
 
-                    // 將 closestPoint 坐標系轉換為 deformable 的相對座標並儲存
-                    var closestVector = deformable.transform.InverseTransformPoint(closestPoint);
+                    // 如果計算有效
+                    if (closestDistance != float.MaxValue)
+                    {
+                        // 將 closestPoint 坐標系轉換為 deformable 的相對座標並儲存
+                        var closestVector = deformable.transform.InverseTransformPoint(closestPoint);
 
-                    // 建立 VertexModify 參數
-                    var args = new VertexModifier.Args(this, i, closestVector);
+                        // 建立 VertexModify 參數
+                        var args = new VertexModifier.Args(this, i, closestVector);
 
-                    // 使用 VertexModify 調整 vertex
-                    var modifiedVector = deformable.ModifyVertex(args);
+                        // 使用 VertexModify 調整 vertex
+                        var modifiedVector = deformable.ModifyVertex(args);
 
-                    vertices[i] = modifiedVector;
+                        vertices[i] = modifiedVector;
+                    }
                 }
             }
             // 更新 mesh.vertices 為形變後的 vertices 陣列
