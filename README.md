@@ -7,10 +7,10 @@
 使用程式碼生成高面數的立方體。
 
 ### 02. ClosestPoint
-Collider.ClosestPoint() 探討，為什麼無法應用在變形系統上。
+`Collider.ClosestPoint()` 探討，以及為什麼無法應用在變形系統上。
 
 ### 03. ProjectOnPlane
-動態演示 Vector3.ProjectOnPlane() 的使用方法。
+動態演示 `Vector3.ProjectOnPlane()` 的使用方法。
 
 ### 04. ClosestPointToBox
 實作並動態演示能夠計算任意點到碰撞器邊界的最進相交點。
@@ -28,7 +28,7 @@ Collider.ClosestPoint() 探討，為什麼無法應用在變形系統上。
 實作動態選擇渲染通道功能，讓模型的面能夠在不同的情況下使用對應的材質。
 
 ## Toolkit 安裝與使用
-1. 到 Release 頁面下載 `MeshDeformationToolkit.unitypackage` 並匯入專案
+1. 到 [Release](https://github.com/naukri7707/MeshDeformationTutorial/releases) 頁面下載 `MeshDeformationToolkit.unitypackage` 並匯入專案
 2. 在要變形的模型上掛上 `DeformableObject` 腳本
 3. 在用來變形的工具上掛上 `BoxDeformer` 腳本，並勾選 `BoxCollider` 的 `isTrigger`
 
