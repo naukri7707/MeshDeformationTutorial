@@ -20,6 +20,7 @@ namespace Naukri.Editor.MeshDeformation
         public override void OnInspectorGUI()
         {
             var monoScriptProperty = serializedObject.FindProperty("m_Script");
+            var parametersProperty = serializedObject.FindProperty(nameof(DeformableObject.parameters));
             var vertexModifiersProperty = serializedObject.FindProperty(nameof(DeformableObject.vertexModifiers));
             var changeShaderPassDynamiclyProperty = serializedObject.FindProperty(nameof(DeformableObject.changeShaderPassDynamicly));
             var materialsProperty = serializedObject.FindProperty(nameof(DeformableObject.materials));
@@ -29,6 +30,7 @@ namespace Naukri.Editor.MeshDeformation
             {
                 EditorGUILayout.PropertyField(monoScriptProperty);
             }
+            EditorGUILayout.PropertyField(parametersProperty);
             EditorGUILayout.PropertyField(vertexModifiersProperty);
             EditorGUILayout.PropertyField(changeShaderPassDynamiclyProperty);
             if (changeShaderPassDynamiclyProperty.boolValue)

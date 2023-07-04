@@ -11,6 +11,8 @@ namespace Naukri.MeshDeformation
 
         public MeshRenderer MeshRenderer { get; private set; }
 
+        public DeformableParameters parameters;
+
         public VertexModifier[] vertexModifiers;
 
         public bool changeShaderPassDynamicly;
@@ -54,7 +56,7 @@ namespace Naukri.MeshDeformation
             }
         }
 
-        public Vector3 ModifyVertex(VertexModifier.Args args)
+        public Vector3 ModifyVertex(VertexModifierArgs args)
         {
             // 紀錄被變更 vertex 的索引
             changedVertex.Add(args.vertexIndex);
