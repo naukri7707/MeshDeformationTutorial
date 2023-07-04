@@ -1,8 +1,4 @@
-﻿using Naukri.MeshDeformation;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
 public class ClosestPointToBox : MonoBehaviour
@@ -36,7 +32,7 @@ public class ClosestPointToBox : MonoBehaviour
         if (isInsideBounds && BoxCollider.ClosestPoint(targetPoint) == targetPoint)
         {
             // 取得 BoxCollider 六面的原點與法線
-            var faceInfos = FaceInfo.GetFaceInfos(boxCollider);
+            var faceInfos = Utility.GetBoxFaceInfos(boxCollider);
 
             var closestDistance = float.MaxValue;
 

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,9 +33,14 @@ namespace Naukri.MeshDeformation
             MeshRenderer = GetComponent<MeshRenderer>();
 
             // 使用克隆體進行計算，避免多個 DeformableObject 同時使用一個 VertexModifier 的情況
-            for (int i = 0; i < vertexModifiers.Length; i++)
+            for (var i = 0; i < vertexModifiers.Length; i++)
             {
                 vertexModifiers[i] = Instantiate(vertexModifiers[i]);
+            }
+            // 使用克隆體進行計算，避免多個 DeformableObject 同時使用一個 ShaderPassLayerCondition 的情況
+            for (var i = 0; i < shaderPassLayers.Length; i++)
+            {
+                shaderPassLayers[i].condition = Instantiate(shaderPassLayers[i].condition);
             }
         }
 
@@ -49,7 +53,7 @@ namespace Naukri.MeshDeformation
             }
             originalVertices = MeshFilter.mesh.vertices;
 
-            if(changeShaderPassDynamicly)
+            if (changeShaderPassDynamicly)
             {
                 MeshRenderer.materials = materials;
                 MeshFilter.mesh.subMeshCount = materials.Length;
@@ -60,17 +64,14 @@ namespace Naukri.MeshDeformation
         {
             // 紀錄被變更 vertex 的索引
             changedVertex.Add(args.vertexIndex);
+
+            var current = args.newPosition;
             // 執行 VertexModifier
             foreach (var modifier in vertexModifiers)
             {
-                modifier.ModifyVertex(args);
-                // 如果被標註為已完成則跳出迴圈
-                if (args.IsCompleted)
-                {
-                    break;
-                }
+                modifier.ModifyVertex(ref current, args);
             }
-            return args.vector;
+            return current;
         }
 
         public void UpdateShaderPass()
@@ -110,7 +111,7 @@ namespace Naukri.MeshDeformation
                             var triangle = new Triangle(vertices[a], vertices[b], vertices[c]);
                             var sharedTriangle = new Triangle(originalVertices[a], originalVertices[b], originalVertices[c]);
                             var args = new ShaderPassLayerCondition.Args(triangle, sharedTriangle);
-                            
+
                             // 找到首個符合條件得 shaderPassLayer
                             foreach (var layer in shaderPassLayers)
                             {
@@ -126,7 +127,7 @@ namespace Naukri.MeshDeformation
                                 modifiedRequest.Enqueue((new[] { a, b, c }, targetShaderPass));
                                 triangles.RemoveRange(i, 3);
                                 // 修正移除 Item 產生的偏移
-                                i -= 3; 
+                                i -= 3;
                             }
                         }
                     }

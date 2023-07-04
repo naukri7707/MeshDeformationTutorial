@@ -1,9 +1,9 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Naukri.Editor
 {
-    public static class CreateScriptableObjectByScriptAsset
+    public static class CreateScriptableObjectWithMenuItem
     {
         public const string itemName = "Assets/Create/Scriptable Object";
 
@@ -13,7 +13,7 @@ namespace Naukri.Editor
             var selectedScript = Selection.activeObject as MonoScript;
             if (selectedScript != null && typeof(ScriptableObject).IsAssignableFrom(selectedScript.GetClass()))
             {
-                ScriptableObject newAsset = ScriptableObject.CreateInstance(selectedScript.GetClass());
+                var newAsset = ScriptableObject.CreateInstance(selectedScript.GetClass());
                 ProjectWindowUtil.CreateAsset(newAsset, $"New {selectedScript.name}.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();

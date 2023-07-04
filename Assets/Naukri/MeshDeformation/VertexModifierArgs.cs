@@ -4,26 +4,33 @@ namespace Naukri.MeshDeformation
 {
     public class VertexModifierArgs
     {
-        public readonly MeshDeformer meshDeformer;
+        public readonly MeshDeformer deformer;
+
+        public readonly DeformableObject deformable;
 
         public readonly int vertexIndex;
 
-        public Vector3 vector;
+        public readonly Vector3 oldPosition;
 
-        private bool isCompleted;
+        public readonly Vector3 newPosition;
 
-        public VertexModifierArgs(MeshDeformer meshDeformer, int vertexIndex, Vector3 vector)
+        public readonly Vector3 oldWorldPosition;
+
+        public readonly Vector3 newWorldPosition;
+
+        public VertexModifierArgs(
+            MeshDeformer deformer, DeformableObject deformable, int vertexIndex,
+            Vector3 oldPosition, Vector3 newPosition,
+            Vector3 oldWorldPosition, Vector3 newWorldPosition
+            )
         {
-            this.meshDeformer = meshDeformer;
+            this.deformer = deformer;
+            this.deformable = deformable;
             this.vertexIndex = vertexIndex;
-            this.vector = vector;
-        }
-
-        public bool IsCompleted => isCompleted;
-
-        public void Completed()
-        {
-            isCompleted = true;
+            this.oldPosition = oldPosition;
+            this.newPosition = newPosition;
+            this.oldWorldPosition = oldWorldPosition;
+            this.newWorldPosition = newWorldPosition;
         }
     }
 }

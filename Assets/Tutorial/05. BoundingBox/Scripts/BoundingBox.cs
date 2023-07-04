@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BoundingBox : MonoBehaviour
@@ -34,7 +32,7 @@ public class BoundingBox : MonoBehaviour
         var outerCount = vertexPerTest - innerCount;
 
 
-        for (int i = 0; i < innerCount; i++)
+        for (var i = 0; i < innerCount; i++)
         {
             if (targetCollider.bounds.Contains(innerPoint))
             {
@@ -44,7 +42,7 @@ public class BoundingBox : MonoBehaviour
                 }
             }
         }
-        for (int i = 0; i < outerCount; i++)
+        for (var i = 0; i < outerCount; i++)
         {
             if (targetCollider.bounds.Contains(outerPoint))
             {
@@ -64,14 +62,14 @@ public class BoundingBox : MonoBehaviour
         var innerCount = vertexPerTest * innerRatio / 100;
         var outerCount = vertexPerTest - innerCount;
 
-        for (int i = 0; i < innerCount; i++)
+        for (var i = 0; i < innerCount; i++)
         {
             if (targetCollider.ClosestPoint(innerPoint) == innerPoint)
             {
 
             }
         }
-        for (int i = 0; i < outerCount; i++)
+        for (var i = 0; i < outerCount; i++)
         {
             if (targetCollider.ClosestPoint(outerPoint) == outerPoint)
             {

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Naukri.MeshDeformation.Modifier
@@ -11,13 +9,12 @@ namespace Naukri.MeshDeformation.Modifier
             BoxCollider BoxCollider { get; }
         }
 
-        protected override void OnVertexModify(VertexModifierArgs args)
+        protected override void OnVertexModify(ref Vector3 current, VertexModifierArgs args)
         {
-            var newPoint = transform.TransformPoint(args.vector);
-            var closestPoint = parameters.BoxCollider.ClosestPoint(newPoint);
-            if (closestPoint != newPoint)
+            var closestPoint = parameters.BoxCollider.ClosestPoint(current);
+            if (closestPoint != current)
             {
-                args.vector = transform.InverseTransformPoint(closestPoint);
+                current = args.deformable.transform.InverseTransformPoint(closestPoint);
             }
         }
     }

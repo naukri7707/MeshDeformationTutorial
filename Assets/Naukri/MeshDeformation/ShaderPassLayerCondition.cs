@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Naukri.MeshDeformation
+﻿namespace Naukri.MeshDeformation
 {
     public abstract class ShaderPassLayerCondition : DeformableObjectModifier
     {
@@ -31,16 +29,15 @@ namespace Naukri.MeshDeformation
 
         internal override void InitialImpl(DeformableObject deformableObject)
         {
-            _target = deformableObject;
-            if (target.parameters is TParameters parameters)
+            if (deformableObject.parameters is TParameters parameters)
             {
                 _parameters = parameters;
             }
             else
             {
-                throw new System.Exception($"{target.name} required parameter {typeof(TParameters).Name}");
+                throw new System.Exception($"{deformableObject.name} required parameter {typeof(TParameters).Name}");
             }
-            Initial();
+            base.InitialImpl(deformableObject);
         }
     }
 }

@@ -220,6 +220,7 @@ GameObject:
   - component: {fileID: 1405872455}
   - component: {fileID: 1405872454}
   - component: {fileID: 1405872458}
+  - component: {fileID: 1405872459}
   m_Layer: 0
   m_Name: Deformer
   m_TagString: Untagged
@@ -298,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1405872452}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.574, y: 0.968, z: -0.586}
+  m_LocalPosition: {x: 0.574, y: 1.129, z: -0.586}
   m_LocalScale: {x: 0.49999994, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -317,8 +318,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f4174263ba87343935cbb377c18367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deformStyle: 12
-  spacing: 0.0001
+  deformDirection: 3
+--- !u!114 &1405872459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405872452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5445cb3d884b1734baef14b5f5309444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deformer: {fileID: 1405872458}
+  filter: 1
+  distanceTolerance: 0.01
+  angleTolerance: 0.1
 --- !u!1 &1694384236
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,16 +346,17 @@ GameObject:
   - component: {fileID: 1694384239}
   - component: {fileID: 1694384238}
   - component: {fileID: 1694384237}
-  - component: {fileID: 1694384240}
   - component: {fileID: 1694384242}
   - component: {fileID: 1694384241}
+  - component: {fileID: 1694384240}
+  - component: {fileID: 1694384243}
   m_Layer: 0
   m_Name: Deformable
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!23 &1694384237
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -417,8 +434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bc4c7cebfdd394dace3c0a3bc28a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parameters: {fileID: 0}
+  parameters: {fileID: 1694384243}
   vertexModifiers:
+  - {fileID: 11400000, guid: b04af9d136a67614c9959c21c219b3d8, type: 2}
   - {fileID: 11400000, guid: 6a90e668b9fc7904a863d08889990ae2, type: 2}
   changeShaderPassDynamicly: 1
   materials:
@@ -459,6 +477,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1694384243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1694384236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ad518457ccc0b42a42f95f4ec361d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <BoxCollider>k__BackingField: {fileID: 1694384242}
 --- !u!1 &1964532558
 GameObject:
   m_ObjectHideFlags: 0

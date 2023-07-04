@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
 using UnityEngine;
 
 namespace Naukri.MeshDeformation
 {
     public abstract class VertexModifier : DeformableObjectModifier
     {
-        internal void ModifyVertex(VertexModifierArgs args)
+        internal void ModifyVertex(ref Vector3 current, VertexModifierArgs args)
         {
-            OnVertexModify(args);
+            OnVertexModify(ref current, args);
         }
 
-        protected abstract void OnVertexModify(VertexModifierArgs args);
+        protected abstract void OnVertexModify(ref Vector3 current, VertexModifierArgs args);
     }
 
     public abstract class VertexModifier<TParameters> : VertexModifier, IWithParameter<TParameters>
@@ -23,16 +20,15 @@ namespace Naukri.MeshDeformation
 
         internal override void InitialImpl(DeformableObject deformableObject)
         {
-            _target = deformableObject;
-            if (target.parameters is TParameters parameters)
+            if (deformableObject.parameters is TParameters parameters)
             {
-                this._parameters = parameters;
+                _parameters = parameters;
             }
             else
             {
-                throw new System.Exception($"{target.name} required parameter {typeof(TParameters).Name}");
+                throw new System.Exception($"{deformableObject.name} required parameter {typeof(TParameters).Name}");
             }
-            Initial();
+            base.InitialImpl(deformableObject);
         }
     }
 }
