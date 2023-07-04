@@ -1,5 +1,5 @@
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 namespace Naukri.Editor
 {
@@ -13,7 +13,7 @@ namespace Naukri.Editor
             var selectedScript = Selection.activeObject as MonoScript;
             if (selectedScript != null && typeof(ScriptableObject).IsAssignableFrom(selectedScript.GetClass()))
             {
-                ScriptableObject newAsset = ScriptableObject.CreateInstance(selectedScript.GetClass());
+                var newAsset = ScriptableObject.CreateInstance(selectedScript.GetClass());
                 ProjectWindowUtil.CreateAsset(newAsset, $"New {selectedScript.name}.asset");
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();

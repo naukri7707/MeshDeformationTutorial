@@ -1,22 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Naukri.MeshDeformation
 {
     public abstract class MeshDeformer : MonoBehaviour
     {
+        public static float modifyDistanceThreshold = 0.001F;
+
         protected virtual void Awake()
         {
 
         }
 
-        protected virtual void OnTriggerStay(Collider other)
+        public void Deform(DeformableObject deformable)
         {
-            if (other.TryGetComponent<DeformableObject>(out var deformable))
-            {
-                OnDeform(deformable);
-            }
+            OnDeform(deformable);
         }
 
         protected abstract void OnDeform(DeformableObject deformable);
