@@ -7,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider))]
 public class BoxDeformer04 : MeshDeformer
 {
-    public DeformStyle style = DeformStyle.YAxis;
+    public DeformStyle deformStyle = DeformStyle.YAxis;
 
     public float spacing = 0.0001F;
 
@@ -23,7 +23,7 @@ public class BoxDeformer04 : MeshDeformer
         // 取得當前 mesh vertices 的副本
         var vertices = deformable.MeshFilter.mesh.vertices;
         // 取得 BoxCollider 六面的原點與法線
-        var faceInfos = FaceInfo.GetFaceInfos(boxCollider, style);
+        var faceInfos = FaceInfo.GetFaceInfos(boxCollider, deformStyle);
 
         // 遍歷所有 vertex
         for (var i = 0; i < vertices.Length; i++)
@@ -74,7 +74,7 @@ public class BoxDeformer04 : MeshDeformer
                     var closestVector = deformable.transform.InverseTransformPoint(closestPoint);
 
                     // 建立 VertexModify 參數
-                    var args = new VertexModifier.Args(this, i, closestVector);
+                    var args = new VertexModifierArgs(this, i, closestVector);
 
                     // 使用 VertexModify 調整 vertex
                     var modifiedVector = deformable.ModifyVertex(args);
