@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -26,7 +24,7 @@ public class BoundingBoxEditor : Editor
             var elapsedTimeByDirectBetter = 0;
             var elapsedTimeWithFilterBetter = 0;
 
-            for (int i = 0; i < boundingBox.testTime; i++)
+            for (var i = 0; i < boundingBox.testTime; i++)
             {
                 startTime = Time.realtimeSinceStartup;
                 boundingBox.EvalCollider();
