@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1f4174263ba87343935cbb377c18367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  style: 8
+  deformStyle: 12
   spacing: 0.0001
 --- !u!1 &1694384236
 GameObject:
@@ -339,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!23 &1694384237
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -417,6 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bc4c7cebfdd394dace3c0a3bc28a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parameters: {fileID: 0}
   vertexModifiers:
   - {fileID: 11400000, guid: 6a90e668b9fc7904a863d08889990ae2, type: 2}
   changeShaderPassDynamicly: 1

@@ -2,7 +2,7 @@
 
 namespace Naukri.MeshDeformation
 {
-    public abstract class ShaderPassLayerCondition : ScriptableObject
+    public abstract class ShaderPassLayerCondition : DeformableObjectModifier
     {
         public class Args
         {
@@ -15,23 +15,6 @@ namespace Naukri.MeshDeformation
                 this.originalTriangle = originalTriangle;
             }
         }
-
-        protected DeformableObject _target;
-
-        protected DeformableObject target => _target;
-
-        protected Transform transform => target.transform;
-
-        protected GameObject gameobject => target.gameObject;
-
-        internal void InitialImpl(DeformableObject deformableObject)
-        {
-            _target = deformableObject;
-            Initial();
-        }
-
-        protected virtual void Initial() { }
-
         internal bool Evaluation(Args args)
         {
             return OnEvaluation(args);
@@ -40,4 +23,24 @@ namespace Naukri.MeshDeformation
         protected abstract bool OnEvaluation(Args args);
     }
 
+    public abstract class ShaderPassLayerCondition<TParameters> : ShaderPassLayerCondition, IWithParameter<TParameters>
+    {
+        private TParameters _parameters;
+
+        public TParameters parameters => _parameters;
+
+        internal override void InitialImpl(DeformableObject deformableObject)
+        {
+            _target = deformableObject;
+            if (target.parameters is TParameters parameters)
+            {
+                _parameters = parameters;
+            }
+            else
+            {
+                throw new System.Exception($"{target.name} required parameter {typeof(TParameters).Name}");
+            }
+            Initial();
+        }
+    }
 }
