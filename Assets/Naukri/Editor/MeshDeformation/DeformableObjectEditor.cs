@@ -10,11 +10,11 @@ namespace Naukri.Editor.MeshDeformation
     [CustomEditor(typeof(DeformableObject), true)]
     public class DeformableObjectEditor : UnityEditor.Editor
     {
-        private DeformableObject meshBuilder;
+        private DeformableObject deformableObject;
 
         private void OnEnable()
         {
-            meshBuilder = serializedObject.targetObject as DeformableObject;
+            deformableObject = serializedObject.targetObject as DeformableObject;
         }
 
         public override void OnInspectorGUI()
