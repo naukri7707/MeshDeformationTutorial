@@ -3,7 +3,7 @@ using UnityEditor;
 
 namespace Naukri.Editor
 {
-    public static class CreateScriptableObjectByScriptAsset
+    public static class CreateScriptableObjectWithMenuItem
     {
         public const string itemName = "Assets/Create/Scriptable Object";
 
