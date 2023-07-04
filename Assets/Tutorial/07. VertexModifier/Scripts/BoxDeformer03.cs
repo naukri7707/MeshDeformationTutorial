@@ -2,7 +2,7 @@ using Naukri.MeshDeformation;
 using UnityEngine;
 
 [RequireComponent(typeof(BoxCollider))]
-public class BoxDeformer02 : MeshDeformer
+public class BoxDeformer03 : MeshDeformer
 {
     public Direction deformDirection = Direction.Down;
 
@@ -48,11 +48,20 @@ public class BoxDeformer02 : MeshDeformer
                     // 將 closestPoint 坐標系轉換為 deformable 的相對座標並儲存
                     var projectedDeformablePos = deformable.transform.InverseTransformPoint(projectedWorldPos);
 
-                    vertices[i] = projectedDeformablePos;
+                    // 建立 VertexModify 所需的參數
+                    var args = new VertexModifierArgs(
+                        this, deformable, i,
+                        targetDeformablePos, projectedDeformablePos,
+                        targetWorldPos, projectedWorldPos
+                        );
+
+                    // 使用 VertexModify 調整 vertex
+                    var modifiedVector = deformable.ModifyVertex(args);
+
+                    vertices[i] = modifiedVector;
                 }
             }
         }
-
         // 更新 mesh.vertices 為形變後的 vertices 陣列
         deformable.MeshFilter.mesh.vertices = vertices;
     }

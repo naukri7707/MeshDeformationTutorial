@@ -223,7 +223,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &230440796
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -235,8 +235,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.83396894, z: 1.9475344}
-  m_Center: {x: 0, y: -0.51580906, z: 0.112942755}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!4 &230440797
 Transform:
   m_ObjectHideFlags: 0
@@ -246,7 +246,7 @@ Transform:
   m_GameObject: {fileID: 230440795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1368041122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,13 +474,14 @@ GameObject:
   - component: {fileID: 1456863240}
   - component: {fileID: 1456863239}
   - component: {fileID: 1456863238}
+  - component: {fileID: 1456863243}
   m_Layer: 0
   m_Name: Deformer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1456863238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -493,8 +494,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd0d640c3568f544a0033091d655306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deformStyle: 8
-  spacing: 0.0001
+  deformDirection: 3
 --- !u!65 &1456863239
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -573,6 +573,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1456863243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1456863237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5445cb3d884b1734baef14b5f5309444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deformer: {fileID: 1456863238}
+  filter: 1
+  distanceTolerance: 0.01
+  angleTolerance: 0.1
 --- !u!1 &1620284900
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,13 +602,14 @@ GameObject:
   - component: {fileID: 1620284903}
   - component: {fileID: 1620284902}
   - component: {fileID: 1620284906}
+  - component: {fileID: 1620284907}
   m_Layer: 0
   m_Name: Deformer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1620284902
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -683,8 +700,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fd0d640c3568f544a0033091d655306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deformStyle: 8
-  spacing: 0.0001
+  deformDirection: 3
+--- !u!114 &1620284907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620284900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5445cb3d884b1734baef14b5f5309444, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deformer: {fileID: 1620284906}
+  filter: 1
+  distanceTolerance: 0.01
+  angleTolerance: 0.1
 --- !u!1 &1964532558
 GameObject:
   m_ObjectHideFlags: 0
@@ -799,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &2074773549
 Rigidbody:
   m_ObjectHideFlags: 0

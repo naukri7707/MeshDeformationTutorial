@@ -1,24 +1,21 @@
 using Naukri.MeshDeformation;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class KeepInBoxHardCodeModifier : VertexModifier
 {
     private BoxCollider boxCollider;
 
-    protected override void Initial()
+    protected override void Initial(DeformableObject deformableObject)
     {
-        boxCollider = target.GetComponent<BoxCollider>();
+        boxCollider = deformableObject.GetComponent<BoxCollider>();
     }
 
-    protected override void OnVertexModify(VertexModifierArgs args)
+    protected override void OnVertexModify(ref Vector3 current, VertexModifierArgs args)
     {
-        var newPoint = transform.TransformPoint(args.vector);
-        var closestPoint = boxCollider.ClosestPoint(newPoint);
-        if (closestPoint != newPoint)
+        var closestPoint = boxCollider.ClosestPoint(current);
+        if (closestPoint != current)
         {
-            args.vector = transform.InverseTransformPoint(closestPoint);
+            current = args.deformable.transform.InverseTransformPoint(closestPoint);
         }
     }
 }
