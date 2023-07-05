@@ -46,6 +46,8 @@ https://github.com/naukri7707/MeshDeformationTutorial/assets/50033668/d6394a57-a
 - 專案的開發版本為 `Unity 2022.1.19f1` ，部分程式碼使用 C# 9.0 的語法。
 - 掛載 `DeformOnTriggerStay` 的物件需要能夠與掛載 `DeformableObject` 的物件碰撞並觸發 `OnTriggerStay()` 才能正常運行
 - 如果使用的 `VertexModifier` 或 `ShaderPassLayer` 為帶參數的版本，請參考第七單元的 `MyParameters` 通過實作所需介面建立繫結資料。
+- 如果想變型外部模型卻出現以下錯誤，請選擇該模型並找到 `Meshes -> Read/Write` 選項將其勾選並儲存以開啟讀寫權限即可。 
+  > Not allowed to access vertices on mesh '<mesh-name> Instance' (isReadable is false; Read/Write must be enabled in import settings)
 
 
 
