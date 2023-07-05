@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RotateSelf : MonoBehaviour
+public class RotateSelfOnEditor : MonoBehaviour
 {
     public bool enableAnimation;
 
@@ -25,4 +25,3 @@ public class RotateSelf : MonoBehaviour
         }
     }
 }
-
