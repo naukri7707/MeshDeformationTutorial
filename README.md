@@ -1,6 +1,14 @@
 # Mesh Deformation Tutorial
 一個簡易的動態網格變形系統開發教學。
 
+![image](https://github.com/naukri7707/MeshDeformationTutorial/assets/50033668/f7bf33f8-75e2-473c-9ba8-a4ef443f3f75)
+
+## Demo
+
+https://github.com/naukri7707/MeshDeformationTutorial/assets/50033668/11f32123-e494-4864-b6bf-5b9777c85521
+
+https://github.com/naukri7707/MeshDeformationTutorial/assets/50033668/d6394a57-aac3-47f9-97c6-043e4a9d5305
+
 ## 場景介紹
 
 ### 01. CubeBuilder
@@ -34,3 +42,8 @@
 
 ## 注意事項
 - 專案的開發版本為 `Unity 2022.1.19f1` ，部分程式碼使用 C# 9.0 的語法。
+
+
+
+
+
