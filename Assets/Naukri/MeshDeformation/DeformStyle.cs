@@ -1,23 +1,12 @@
-﻿using System;
-
-namespace Naukri.MeshDeformation
+﻿namespace Naukri.MeshDeformation
 {
-    [Flags]
-    public enum DeformStyle
+    public enum Direction
     {
-        None = 0,
-        Right = 1 << 0,
-        Left = 1 << 1,
-        Up = 1 << 2,
-        Down = 1 << 3,
-        Forward = 1 << 4,
-        Back = 1 << 5,
-        XAxis = Right | Left,
-        YAxis = Up | Down,
-        ZAxis = Forward | Back,
-        XYFace = XAxis | YAxis,
-        XZFace = XAxis | ZAxis,
-        YZFace = YAxis | ZAxis,
-        All = XAxis | YAxis | ZAxis,
+        Right,
+        Left,
+        Up,
+        Down,
+        Forward,
+        Back,
     }
 }

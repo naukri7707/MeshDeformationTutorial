@@ -1,57 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Naukri.MeshDeformation
 {
-    public abstract class VertexModifier : ScriptableObject
+    public abstract class VertexModifier : DeformableObjectModifier
     {
-        public class Args
+        internal void ModifyVertex(ref Vector3 current, VertexModifierArgs args)
         {
-            public readonly MeshDeformer meshDeformer;
+            OnVertexModify(ref current, args);
+        }
 
-            public readonly int vertexIndex;
+        protected abstract void OnVertexModify(ref Vector3 current, VertexModifierArgs args);
+    }
 
-            public Vector3 vector;
+    public abstract class VertexModifier<TParameters> : VertexModifier, IWithParameter<TParameters>
+    {
+        private TParameters _parameters;
 
-            private bool isCompleted;
+        public TParameters parameters => _parameters;
 
-            public Args(MeshDeformer meshDeformer, int vertexIndex, Vector3 vector)
+        internal override void InitialImpl(DeformableObject deformableObject)
+        {
+            if (deformableObject.parameters is TParameters parameters)
             {
-                this.meshDeformer = meshDeformer;
-                this.vertexIndex = vertexIndex;
-                this.vector = vector;
+                _parameters = parameters;
             }
-
-            public bool IsCompleted => isCompleted;
-
-            public void Completed()
+            else
             {
-                isCompleted = true;
+                throw new System.Exception($"{deformableObject.name} required parameter {typeof(TParameters).Name}");
             }
+            base.InitialImpl(deformableObject);
         }
-
-        protected DeformableObject _target;
-
-        protected DeformableObject target => _target;
-
-        protected Transform transform => target.transform;
-
-        protected GameObject gameobject => target.gameObject;
-
-        internal void InitialImpl(DeformableObject deformableObject)
-        {
-            _target = deformableObject;
-            Initial();
-        }
-
-        protected virtual void Initial() { }
-
-        internal void ModifyVertex(Args args)
-        {
-            OnVertexModify(args);
-        }
-
-        protected abstract void OnVertexModify(Args args);
     }
 }

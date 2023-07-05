@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Naukri.MeshDeformation
 {
@@ -15,39 +14,28 @@ namespace Naukri.MeshDeformation
             this.normal = normal;
         }
 
-        public static FaceInfo[] GetFaceInfos(BoxCollider boxCollider)
+        public static FaceInfo GetFaceInfo(BoxCollider boxCollider, Direction style)
         {
             var transform = boxCollider.transform;
             var center = boxCollider.bounds.center;
             var extents = boxCollider.bounds.extents;
 
-            var faces = new FaceInfo[6];
-
-            faces[0] = new FaceInfo(center + new Vector3(extents.x, 0, 0), transform.right);
-            faces[1] = new FaceInfo(center + new Vector3(-extents.x, 0, 0), -transform.right);
-            faces[2] = new FaceInfo(center + new Vector3(0, extents.y, 0), transform.up);
-            faces[3] = new FaceInfo(center + new Vector3(0, -extents.y, 0), -transform.up);
-            faces[4] = new FaceInfo(center + new Vector3(0, 0, extents.z), transform.forward);
-            faces[5] = new FaceInfo(center + new Vector3(0, 0, -extents.z), -transform.forward);
-
-            return faces;
+            return style switch
+            {
+                Direction.Right => new FaceInfo(center + new Vector3(extents.x, 0, 0), transform.right),
+                Direction.Left => new FaceInfo(center + new Vector3(-extents.x, 0, 0), -transform.right),
+                Direction.Up => new FaceInfo(center + new Vector3(0, extents.y, 0), transform.up),
+                Direction.Down => new FaceInfo(center + new Vector3(0, -extents.y, 0), -transform.up),
+                Direction.Forward => new FaceInfo(center + new Vector3(0, 0, extents.z), transform.forward),
+                Direction.Back => new FaceInfo(center + new Vector3(0, 0, -extents.z), -transform.forward),
+                _ => default
+            };
         }
 
-        public static FaceInfo[] GetFaceInfos(BoxCollider boxCollider, DeformStyle style)
+        public void Deconstruct(out Vector3 origin, out Vector3 normal)
         {
-            var transform = boxCollider.transform;
-            var center = boxCollider.bounds.center;
-            var extents = boxCollider.bounds.extents;
-
-            var faces = new List<FaceInfo>();
-            if (style.HasFlag(DeformStyle.Right)) faces.Add(new FaceInfo(center + new Vector3(extents.x, 0, 0), transform.right));
-            if (style.HasFlag(DeformStyle.Left)) faces.Add(new FaceInfo(center + new Vector3(-extents.x, 0, 0), -transform.right));
-            if (style.HasFlag(DeformStyle.Up)) faces.Add(new FaceInfo(center + new Vector3(0, extents.y, 0), transform.up));
-            if (style.HasFlag(DeformStyle.Down)) faces.Add(new FaceInfo(center + new Vector3(0, -extents.y, 0), -transform.up));
-            if (style.HasFlag(DeformStyle.Forward)) faces.Add(new FaceInfo(center + new Vector3(0, 0, extents.z), transform.forward));
-            if (style.HasFlag(DeformStyle.Back)) faces.Add(new FaceInfo(center + new Vector3(0, 0, -extents.z), -transform.forward));
-
-            return faces.ToArray();
+            origin = this.origin;
+            normal = this.normal;
         }
     }
 }
