@@ -11,10 +11,11 @@ namespace Naukri.MeshDeformation.Modifier
 
         protected override void OnVertexModify(ref Vector3 current, VertexModifierArgs args)
         {
-            var closestPoint = parameters.BoxCollider.ClosestPoint(current);
-            if (closestPoint != current)
+            var currentWorldPos = args.deformable.transform.TransformPoint(current);
+            var closestWorldPos = parameters.BoxCollider.ClosestPoint(currentWorldPos);
+            if (currentWorldPos != closestWorldPos)
             {
-                current = args.deformable.transform.InverseTransformPoint(closestPoint);
+                current = args.deformable.transform.InverseTransformPoint(closestWorldPos);
             }
         }
     }

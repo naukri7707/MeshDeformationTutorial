@@ -12,10 +12,11 @@ public class KeepInBoxHardCodeModifier : VertexModifier
 
     protected override void OnVertexModify(ref Vector3 current, VertexModifierArgs args)
     {
-        var closestPoint = boxCollider.ClosestPoint(current);
-        if (closestPoint != current)
+        var currentWorldPos = args.deformable.transform.TransformPoint(current);
+        var closestWorldPos = boxCollider.ClosestPoint(currentWorldPos);
+        if (currentWorldPos != closestWorldPos)
         {
-            current = args.deformable.transform.InverseTransformPoint(closestPoint);
+            current = args.deformable.transform.InverseTransformPoint(closestWorldPos);
         }
     }
 }
